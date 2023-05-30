@@ -1,9 +1,8 @@
-# Imports
 import random
 import time
 
 
-# reset variables
+# Reset variables
 questions_answered = 0
 correct_questions = 0
 incorrect_questions = 0
@@ -44,7 +43,7 @@ def num_check(question, error, num_type, exit_code=None, low=None, high=None):
             else:
                 response = num_type(response)
             
-            # Checks if they inputed correct number
+            # Checks if they inputted correct number
             if low is not None and high is not None:
                 if low < response < high:
                     return response
@@ -88,16 +87,16 @@ def yes_no(question):
             print()
 
 
-# definition that generates questions randomly and will call this function 
+# Definition that generates questions randomly and will call this function
 def question(symbol, points_val):
 
     valid = False
     while not valid:
 
         # Question error if they input unexpected values
-        q_error = "Please enter an interger between 0 - 1000 (dont be dumb)"
+        q_error = "Please enter an integer between 0 - 1000 (dont be dumb)"
 
-        # Generate random intergers
+        # Generate random integer
         temp_int = random.randint(1, 10)
         int_i = random.randint(1, 10)
         int_ii = temp_int * int_i
@@ -130,7 +129,7 @@ def question(symbol, points_val):
             return result
 
 
-# function will print instructions when called
+# Function will print instructions when called
 def instructions():
     statement_generator("Instructions", "|", "-")
     print("There are 5 modes you can choose:")
@@ -165,7 +164,7 @@ def statement_generator(statement, side_decoration, top_bottom_decoration):
     return ""
 
 
-# timer function stalls program and counts down
+# Timer function stalls program and counts down
 def timer(t):
 
     print("00 : {}".format(t))
@@ -176,14 +175,15 @@ def timer(t):
         print("00 : {}".format(t))
 
 
-# main routine
-statement_generator("Welcome to Rizzos Math Quiz", "!", "=")
+# Main routine
+statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
+print("\033[1;32;40m welcome \n")
 
 # define the saved points 
 save_points = 0
 
-# asks if user has played before
-# if no print instructions 
+# Asks if user has played before
+# If no print instructions
 played_before = yes_no("Have you played before? ")
 if played_before == "no":
     instructions()
@@ -194,29 +194,29 @@ print("Enjoy!")
 play_again = "yes"
 while play_again == "yes":
 
-    # reset variables
+    # Reset variables
     questions_answered = 0
     correct_questions = 0
     incorrect_questions = 0
     points = 0
     questions_list = []
 
-    # symbol list
+    # Symbol list
     symbol_list = ["+", "-", "*", "/"]
 
-    # ask user for which type of questions they would like
+    # Ask user for which type of questions they would like
     question_type = question_checker("Which type of questions would you like? (a, s, m, d, '') ")
 
-    # ask uesr for number of questions
-    num_questions_error = "<error> enter an interger"
+    # Ask user for number of questions
+    num_questions_error = "<error> enter an integer"
     num_questions = num_check("How many questions? ", num_questions_error, int, None, 0)
     
-    # ask user if they want a timer 
+    # Ask user if they want a timer
     time_set = yes_no("Would you like a timer? ")
 
     if time_set == "yes":
         # Ask user for the amount of time they get for the questions
-        seconds = num_check("how many seconds? ", "enetr an number between 1, 59", int, None, 0, 60)
+        seconds = num_check("how many seconds? ", "enter an number between 1, 59", int, None, 0, 60)
         print("Timer set! ")
         # Set start
         start = time.time()
@@ -306,7 +306,7 @@ while play_again == "yes":
         print()
         statement_generator("Thanks for playing", "!", "=")
 
-    # Doesnt display history if user says no
+    # Doesn't display history if user says no
     elif show_history == "no":
         print()
         statement_generator("Thanks for playing", "!", "=")
@@ -319,3 +319,6 @@ while play_again == "yes":
         continue
     else:
         play_again = "no"
+
+    print("\033[1;32;40m thx for doing the quiz  \n")
+
