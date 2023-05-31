@@ -2,13 +2,6 @@ import random
 import time
 
 
-# Reset variables
-questions_answered = 0
-correct_questions = 0
-incorrect_questions = 0
-points = 0
-questions_list = []
-
 # Functions go here
 
 # Checks which questions user would like to answer
@@ -23,7 +16,7 @@ def question_checker(question):
         # Checks how long word is
         if response not in ques_type_list:
             print("<error> please first letter of math question eg: a for addition\n"
-            "OR press <eneter> for all types of questions")
+                  "OR press <enter> for all types of questions")
             print()
             continue
         else:
@@ -32,7 +25,6 @@ def question_checker(question):
 
 # Number checker to make sure user inputs correctly
 def num_check(question, error, num_type, exit_code=None, low=None, high=None):
-
     valid = False
     while not valid:
         try:
@@ -42,7 +34,7 @@ def num_check(question, error, num_type, exit_code=None, low=None, high=None):
                 return response
             else:
                 response = num_type(response)
-            
+
             # Checks if they inputted correct number
             if low is not None and high is not None:
                 if low < response < high:
@@ -89,7 +81,6 @@ def yes_no(question):
 
 # Definition that generates questions randomly and will call this function
 def question(symbol, points_val):
-
     valid = False
     while not valid:
 
@@ -103,7 +94,7 @@ def question(symbol, points_val):
 
         # Get answer and there answer to the question
         ans = eval(str(int_ii) + symbol + str(int_i))
-        response = num_check("{} {} {} = ".format(int_ii, symbol, int_i), q_error, int, "xxx",  -1, 1001)
+        response = num_check("{} {} {} = ".format(int_ii, symbol, int_i), q_error, int, "xxx", -1, 1001)
 
         # If user quits
         if response == "xxx":
@@ -149,13 +140,11 @@ def instructions():
 
 # Gives statements decoration on sides and top
 def statement_generator(statement, side_decoration, top_bottom_decoration):
-
     sides = side_decoration * 3
 
     statement = "{} {} {}".format(sides, statement, sides)
 
     top_bottom = top_bottom_decoration * len(statement)
-
 
     print(top_bottom)
     print(statement)
@@ -166,7 +155,6 @@ def statement_generator(statement, side_decoration, top_bottom_decoration):
 
 # Timer function stalls program and counts down
 def timer(t):
-
     print("00 : {}".format(t))
 
     while t != 0:
@@ -174,6 +162,13 @@ def timer(t):
         time.sleep(1)
         print("00 : {}".format(t))
 
+
+# Reset variables
+questions_answered = 0
+correct_questions = 0
+incorrect_questions = 0
+points = 0
+questions_list = []
 
 # Main routine
 statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
@@ -210,7 +205,7 @@ while play_again == "yes":
     # Ask user for number of questions
     num_questions_error = "<error> enter an integer"
     num_questions = num_check("How many questions? ", num_questions_error, int, None, 0)
-    
+
     # Ask user if they want a timer
     time_set = yes_no("Would you like a timer? ")
 
@@ -245,7 +240,7 @@ while play_again == "yes":
         else:
             result = question(random.choice(symbol_list), 50)
             num_points = 50
-        
+
         # Add number of correct and incorrect questions
         if result == "correct":
             correct_questions += 1
@@ -262,16 +257,13 @@ while play_again == "yes":
 
         # Add question result to a list
         questions_list.append("Question #{}: {}".format(questions_answered, result))
-        
+
         # number of questions left go down
         num_questions -= 1
 
-
-    
     print(questions_answered)
     print(correct_questions)
     print(incorrect_questions)
-
 
     # **** Calculate Game Stats ****
     percent_correct = correct_questions / questions_answered * 100
@@ -280,7 +272,8 @@ while play_again == "yes":
     # Displays game stats with % values to the nearest whole number
     print()
     statement_generator("Quiz Statistics", "-", "*")
-    print("Correct: {}: ({:.0f}%)\nIncorrect: {}: ({:.0f}%)".format(correct_questions, percent_correct, incorrect_questions, percent_incorrect))
+    print("Correct: {}: ({:.0f}%)\nIncorrect: {}: ({:.0f}%)".format(correct_questions, percent_correct,
+                                                                    incorrect_questions, percent_incorrect))
     print()
 
     # Print and figure out new high score 
@@ -291,7 +284,6 @@ while play_again == "yes":
         print("Nice Job!")
     print("Total points: ", points)
     print()
-
 
     # Asks user if they want to see there history
     show_history = yes_no("would you like to see game history? ")
@@ -310,7 +302,7 @@ while play_again == "yes":
     elif show_history == "no":
         print()
         statement_generator("Thanks for playing", "!", "=")
-    
+
     # Ask user if they want to play again
     print()
     play_again = yes_no("Would you like to play again? ")
@@ -320,5 +312,4 @@ while play_again == "yes":
     else:
         play_again = "no"
 
-    print("\033[1;32;40m thx for doing the quiz  \n")
-
+    print("\033[2;32;40m thx for doing the quiz  \n")
