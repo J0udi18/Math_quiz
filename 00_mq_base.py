@@ -172,6 +172,7 @@ questions_list = []
 
 # Main routine
 statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
+
 print("\033[1;32;40m welcome \n")
 
 # define the saved points 
